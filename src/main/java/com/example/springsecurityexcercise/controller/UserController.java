@@ -45,6 +45,8 @@ public class UserController {
 
         String token = userService.login(userLoginRequest.getName(), userLoginRequest.getPassword());
 
+        // 로그인 시 Encoded password does not look like BCrypt 에러가 뜨는 이유
+
         return Response.success(new UserLoginResponse(token));
     }
 
