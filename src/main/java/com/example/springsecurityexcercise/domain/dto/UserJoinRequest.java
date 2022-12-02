@@ -16,17 +16,4 @@ public class UserJoinRequest {
     private String email;
 
 
-    public User toEntity(){
-        return User.builder()
-                .userName(name)
-                .emailAddress(email)
-                .password(password)
-                .build();
-
-
-    }
-
-
-
-
 }

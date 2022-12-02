@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ErrorCode {
 
-    DUPLICATED_USER_NAME(HttpStatus.CONFLICT, "UserName이 중복됩니다.")
+    DUPLICATED_USER_NAME(HttpStatus.CONFLICT, "UserName이 중복됩니다."),
+    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다."),
+    NOT_FOUND_USER_NAME(HttpStatus.NOT_FOUND, "아이디를 찾을 수 없습니다.")
     
     ;
     
