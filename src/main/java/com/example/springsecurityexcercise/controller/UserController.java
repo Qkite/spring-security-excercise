@@ -5,6 +5,8 @@ import com.example.springsecurityexcercise.domain.Response;
 import com.example.springsecurityexcercise.domain.User;
 import com.example.springsecurityexcercise.domain.dto.UserJoinRequest;
 import com.example.springsecurityexcercise.domain.dto.UserJoinResponse;
+import com.example.springsecurityexcercise.domain.dto.UserLoginRequest;
+import com.example.springsecurityexcercise.domain.dto.UserLoginResponse;
 import com.example.springsecurityexcercise.exception.ErrorCode;
 import com.example.springsecurityexcercise.exception.HospitalException;
 import com.example.springsecurityexcercise.service.UserService;
@@ -36,6 +38,17 @@ public class UserController {
 
         return Response.success(new UserJoinResponse(savedUser.getUserName(), savedUser.getEmailAddress()));
     }
+
+    @PostMapping("/login")
+    public Response<UserLoginResponse> join(@RequestBody UserLoginRequest userLoginRequest) {
+        log.info(userLoginRequest.getName());
+
+        String token = userService.login(userLoginRequest.getName(), userLoginRequest.getPassword());
+
+        return Response.success(new UserLoginResponse(token));
+    }
+
+
 
 
 
