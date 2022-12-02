@@ -60,7 +60,7 @@ public class UserService {
 
         String token = JwtTokenUtil.createToken(selectedUser.getUserName(), key, expireTimeMs);
 
-        return "token";
+        return token;
 
 
 
