@@ -22,4 +22,17 @@ public class JwtTokenUtil {
                 .compact();
 
     }
+
+    public static Claims extractClaims(String token, String key){
+
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+
+        // Secret key를 이용해서 token을 parser
+    }
+
+    public static boolean isExpired(String token, String secretKey) {
+        Date expiredDate = extractClaims(token, secretKey).getExpiration();
+        return expiredDate.before(new Date());
+        // 토큰에 있는 유효기간이 지금보다 전인지(만료되었는지) 확인
+    }
 }
