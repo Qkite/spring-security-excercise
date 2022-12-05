@@ -1,6 +1,7 @@
 package com.example.springsecurityexcercise.service;
 
 import com.example.springsecurityexcercise.domain.User;
+import com.example.springsecurityexcercise.domain.UserRole;
 import com.example.springsecurityexcercise.domain.dto.UserJoinRequest;
 import com.example.springsecurityexcercise.exception.ErrorCode;
 import com.example.springsecurityexcercise.exception.HospitalException;
@@ -39,6 +40,7 @@ public class UserService {
                 .userName(userJoinRequest.getName())
                 .emailAddress(userJoinRequest.getEmail())
                 .password(bCryptPasswordEncoder.encode(userJoinRequest.getPassword()))
+                .userRole(UserRole.USER)
                 .build();
 
         userRepository.save(user);
