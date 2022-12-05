@@ -62,7 +62,11 @@ public class UserService {
 
         return token;
 
+    }
 
+    public User getUserByUserName(String userName){
+        return userRepository.findByUserName(userName)
+                .orElseThrow(() -> new HospitalException(ErrorCode.NOT_FOUND_USER_NAME, ""));
 
     }
 }

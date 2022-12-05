@@ -1,5 +1,6 @@
 package com.example.springsecurityexcercise.configuration;
 
+import com.example.springsecurityexcercise.domain.User;
 import com.example.springsecurityexcercise.service.UserService;
 import com.example.springsecurityexcercise.utils.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
@@ -56,8 +57,15 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
+        String userName = JwtTokenUtil.getUserName(token, secretKey);
+
+        User user = userService.getUserByUserName(userName);
+
+
+
+
         // 문열어주기
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken("", null, List.of(new SimpleGrantedAuthority( "USER")));
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(), null, List.of(new SimpleGrantedAuthority( user.getUserRole().name())));
         usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken); // 권한 부여
         filterChain.doFilter(request, response);

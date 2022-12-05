@@ -30,6 +30,11 @@ public class JwtTokenUtil {
         // Secret key를 이용해서 token을 parser
     }
 
+    public static String getUserName(String token, String key){
+        return extractClaims(token, key).get("userName").toString();
+    }
+
+
     public static boolean isExpired(String token, String secretKey) {
         Date expiredDate = extractClaims(token, secretKey).getExpiration();
         return expiredDate.before(new Date());
